@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 class Landing extends StatelessWidget {
   const Landing({super.key});
 
-  final double logoHeight = 200.0;
-  final double logoWidth = 200.0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
