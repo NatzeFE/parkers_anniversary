@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:parkers_anniversary/screens/how_to.dart';
+import 'package:parkers_anniversary/screens/profile.dart';
 import '../screens/history.dart';
 import '../screens/intro_screen.dart';
 
@@ -46,8 +48,14 @@ class MenuDrawer extends StatelessWidget {
               case "Home":
                 screen = const IntroScreen();
                 break;
+              case "How To":
+                screen = const HowTo();
+                break;
               case "History":
                 screen = const History();
+                break;
+              case "Profile":
+                screen = const Profile();
                 break;
             }
             Navigator.pop(context);
