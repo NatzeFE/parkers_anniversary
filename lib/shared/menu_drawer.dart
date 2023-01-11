@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parkers_anniversary/screens/how_to.dart';
+import 'package:parkers_anniversary/screens/landing.dart';
 import 'package:parkers_anniversary/screens/profile.dart';
 import '../screens/history.dart';
 import '../screens/intro_screen.dart';
@@ -22,15 +23,20 @@ class MenuDrawer extends StatelessWidget {
       "How to",
       "History",
       "Profile",
+      "Landing", // temporary
     ];
 
     List<Widget> menuItems = [];
     menuItems.add(
       const DrawerHeader(
-        decoration: BoxDecoration(color: Colors.red),
+        decoration: BoxDecoration(
+            color: Colors.red,
+            image: DecorationImage(
+                image: AssetImage("assets/images/drawer_cover.jpg"),
+                fit: BoxFit.cover)),
         child: Text(
           "Parker's Anniversary",
-          style: TextStyle(color: Colors.white, fontSize: 30),
+          style: TextStyle(color: Colors.red, fontSize: 27),
         ),
       ),
     );
@@ -56,6 +62,9 @@ class MenuDrawer extends StatelessWidget {
                 break;
               case "Profile":
                 screen = const Profile();
+                break;
+              case "Landing":
+                screen = const Landing();
                 break;
             }
             Navigator.pop(context);

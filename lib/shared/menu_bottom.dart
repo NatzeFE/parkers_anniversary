@@ -31,14 +31,14 @@ class MenuBottom extends StatelessWidget {
         }
       },
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         // BottomNavigationBarItem(
         //     icon: Icon(Icons.auto_stories_outlined), label: "how to"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.add_box_rounded), label: "new entry"),
+            icon: Icon(Icons.add_box_rounded), label: "New Entry"),
         // BottomNavigationBarItem(icon: Icon(Icons.history), label: "history"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.account_box_outlined), label: "profile"),
+            icon: Icon(Icons.account_box_outlined), label: "Profile"),
       ],
     );
   }
