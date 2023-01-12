@@ -8,7 +8,20 @@ class History extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Our History")),
+      appBar: AppBar(
+          title: Row(
+        children: [
+          Image.asset(
+            "assets/images/logo.png",
+            fit: BoxFit.contain,
+            height: 48,
+          ),
+          const SizedBox(
+            width: 40,
+          ),
+          const Text("Our History"),
+        ],
+      )),
       bottomNavigationBar: const MenuBottom(),
       drawer: const MenuDrawer(),
       body: GridView.count(

@@ -9,7 +9,20 @@ class HowTo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("How to")),
+        appBar: AppBar(
+            title: Row(
+          children: [
+            Image.asset(
+              "assets/images/logo.png",
+              fit: BoxFit.contain,
+              height: 48,
+            ),
+            const SizedBox(
+              width: 40,
+            ),
+            const Text("How to"),
+          ],
+        )),
         bottomNavigationBar: const MenuBottom(),
         drawer: const MenuDrawer(),
         body: Center(
@@ -19,7 +32,7 @@ class HowTo extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: const Text(
                     "How to enter",
                     style: TextStyle(

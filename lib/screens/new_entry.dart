@@ -49,7 +49,20 @@ class _NewEntryState extends State<NewEntry> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("New Entry")),
+      appBar: AppBar(
+          title: Row(
+        children: [
+          Image.asset(
+            "assets/images/logo.png",
+            fit: BoxFit.contain,
+            height: 48,
+          ),
+          const SizedBox(
+            width: 40,
+          ),
+          const Text("New Entry"),
+        ],
+      )),
       bottomNavigationBar: const MenuBottom(),
       drawer: const MenuDrawer(),
       body: Center(
