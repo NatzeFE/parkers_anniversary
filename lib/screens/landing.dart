@@ -30,10 +30,10 @@ class Landing extends StatelessWidget {
           ),
           Positioned(
             top: (MediaQuery.of(context).size.height / 2) - 150.0 / 2,
-            left: (MediaQuery.of(context).size.width / 2) - 150.0 / 2,
+            left: (MediaQuery.of(context).size.width / 2) - 250.0 / 2,
             child: Container(
               height: 150.0,
-              width: 150.0,
+              width: 250.0,
               decoration: const BoxDecoration(
                   color: Colors.red,
                   image: DecorationImage(
