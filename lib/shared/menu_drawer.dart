@@ -20,7 +20,7 @@ class MenuDrawer extends StatelessWidget {
   List<Widget> buildMenuItems(BuildContext context) {
     final List<String> menuTitles = [
       "Home",
-      "How to",
+      "How To",
       "History",
       "Profile",
       "Landing", // temporary
