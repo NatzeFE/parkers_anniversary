@@ -10,6 +10,8 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -25,21 +27,21 @@ class IntroScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(FontAwesomeIcons.facebook,
-                    color: Colors.grey[400], size: 25.0),
+                    color: Colors.red[400], size: 25.0),
                 const SizedBox(
                   width: 15,
                 ),
                 Icon(FontAwesomeIcons.instagram,
-                    color: Colors.grey[400], size: 25.0),
+                    color: Colors.red[400], size: 25.0),
                 const SizedBox(
                   width: 15,
                 ),
-                Icon(FontAwesomeIcons.at, color: Colors.grey[400], size: 25.0),
+                Icon(FontAwesomeIcons.at, color: Colors.red[400], size: 25.0),
                 const SizedBox(
                   width: 15,
                 ),
                 Icon(FontAwesomeIcons.envelope,
-                    color: Colors.grey[400], size: 25.0),
+                    color: Colors.red[400], size: 25.0),
               ],
             ),
           ],

@@ -10,19 +10,25 @@ class HowTo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            backgroundColor: Colors.white,
+            iconTheme: const IconThemeData(color: Colors.black),
             title: Row(
-          children: [
-            Image.asset(
-              "assets/images/logo.png",
-              fit: BoxFit.contain,
-              height: 48,
-            ),
-            const SizedBox(
-              width: 40,
-            ),
-            const Text("How to"),
-          ],
-        )),
+              children: [
+                Image.asset(
+                  "assets/images/logo.png",
+                  fit: BoxFit.contain,
+                  height: 48,
+                ),
+                const SizedBox(
+                  width: 40,
+                ),
+                const Text(
+                  "How to",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ],
+            )),
         bottomNavigationBar: const MenuBottom(),
         drawer: const MenuDrawer(),
         body: Center(
