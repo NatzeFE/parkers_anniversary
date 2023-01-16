@@ -13,7 +13,7 @@ class IntroScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.asset(
               "assets/images/logo.png",
@@ -24,24 +24,27 @@ class IntroScreen extends StatelessWidget {
               width: 40,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(FontAwesomeIcons.facebook,
-                    color: Colors.red[400], size: 25.0),
-                const SizedBox(
-                  width: 15,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(left: 5.0),
+                  child: Icon(FontAwesomeIcons.facebook,
+                      color: Colors.red[400], size: 25.0),
                 ),
-                Icon(FontAwesomeIcons.instagram,
-                    color: Colors.red[400], size: 25.0),
-                const SizedBox(
-                  width: 15,
+                Container(
+                  margin: const EdgeInsets.only(left: 5.0),
+                  child: Icon(FontAwesomeIcons.instagram,
+                      color: Colors.red[400], size: 25.0),
                 ),
-                Icon(FontAwesomeIcons.at, color: Colors.red[400], size: 25.0),
-                const SizedBox(
-                  width: 15,
+                Container(
+                    margin: const EdgeInsets.only(left: 5.0),
+                    child: Icon(FontAwesomeIcons.at,
+                        color: Colors.red[400], size: 25.0)),
+                Container(
+                  margin: const EdgeInsets.only(left: 5.0),
+                  child: Icon(FontAwesomeIcons.envelope,
+                      color: Colors.red[400], size: 25.0),
                 ),
-                Icon(FontAwesomeIcons.envelope,
-                    color: Colors.red[400], size: 25.0),
               ],
             ),
           ],

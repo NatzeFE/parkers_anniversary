@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:parkers_anniversary/screens/how_to.dart';
 import 'package:parkers_anniversary/screens/landing.dart';
 import 'package:parkers_anniversary/screens/login.dart';
+import 'package:parkers_anniversary/screens/new_entries.dart';
 import 'package:parkers_anniversary/screens/profile.dart';
 import 'package:parkers_anniversary/screens/signup.dart';
 import '../screens/history.dart';
@@ -28,6 +29,7 @@ class MenuDrawer extends StatelessWidget {
       "Landing", // temporary
       "Login", // temporary
       "Signup", // temporary
+      "New Entries", // temporary
     ];
 
     List<Widget> menuItems = [];
@@ -75,6 +77,9 @@ class MenuDrawer extends StatelessWidget {
                 break;
               case "Signup":
                 screen = const Signup();
+                break;
+              case "New Entries":
+                screen = const NewEntries();
                 break;
             }
             Navigator.pop(context);

@@ -69,7 +69,7 @@ class History extends StatelessWidget {
               backgroundColor: Colors.black,
               radius: 120,
               child: CircleAvatar(
-                radius: 110,
+                radius: 120,
                 backgroundImage: AssetImage('assets/images/history1.jpg'),
               ),
             ),

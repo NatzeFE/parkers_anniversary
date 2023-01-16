@@ -72,34 +72,36 @@ class _NewEntryState extends State<NewEntry> {
       bottomNavigationBar: const MenuBottom(),
       drawer: const MenuDrawer(),
       body: Center(
-        child: Column(
-          children: [
-            Container(
-              height: 70,
-            ),
-            _image != null
-                ? Image.file(
-                    _image!,
-                    width: 250,
-                    height: 250,
-                    fit: BoxFit.cover,
-                  )
-                : Image.network(
-                    "https://archive.org/download/placeholder-image/placeholder-image.jpg"),
-            const SizedBox(
-              height: 100,
-            ),
-            customButton(
-              title: "Pick from Gallery",
-              icon: Icons.image_outlined,
-              onClick: () => getImage(ImageSource.gallery),
-            ),
-            customButton(
-              title: "Pick from Camera",
-              icon: Icons.camera,
-              onClick: () => getImage(ImageSource.camera),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 70,
+              ),
+              _image != null
+                  ? Image.file(
+                      _image!,
+                      width: 250,
+                      height: 250,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.network(
+                      "https://archive.org/download/placeholder-image/placeholder-image.jpg"),
+              const SizedBox(
+                height: 100,
+              ),
+              customButton(
+                title: "Pick from Gallery",
+                icon: Icons.image_outlined,
+                onClick: () => getImage(ImageSource.gallery),
+              ),
+              customButton(
+                title: "Pick from Camera",
+                icon: Icons.camera,
+                onClick: () => getImage(ImageSource.camera),
+              ),
+            ],
+          ),
         ),
       ),
     );
