@@ -75,6 +75,8 @@ class _NewEntriesState extends State<NewEntries> {
                           fontSize: 18,
                         ),
                         decoration: InputDecoration(
+                          hintText: "First Name",
+                          prefixIcon: const Icon(Icons.account_box_rounded),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide: const BorderSide(
@@ -114,6 +116,8 @@ class _NewEntriesState extends State<NewEntries> {
                           fontSize: 18,
                         ),
                         decoration: InputDecoration(
+                          hintText: "Last Name",
+                          prefixIcon: const Icon(Icons.account_box_rounded),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide: const BorderSide(
@@ -153,6 +157,8 @@ class _NewEntriesState extends State<NewEntries> {
                           fontSize: 18,
                         ),
                         decoration: InputDecoration(
+                          hintText: "Phone number",
+                          prefixIcon: const Icon(Icons.phone_android_rounded),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide: const BorderSide(
@@ -192,6 +198,8 @@ class _NewEntriesState extends State<NewEntries> {
                           fontSize: 18,
                         ),
                         decoration: InputDecoration(
+                          hintText: "Email",
+                          prefixIcon: const Icon(Icons.email_sharp),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide: const BorderSide(
@@ -231,6 +239,8 @@ class _NewEntriesState extends State<NewEntries> {
                           fontSize: 18,
                         ),
                         decoration: InputDecoration(
+                          hintText: "Receipt number",
+                          prefixIcon: const Icon(Icons.receipt_long_rounded),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide: const BorderSide(

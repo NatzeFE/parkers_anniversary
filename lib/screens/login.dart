@@ -1,5 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter/gestures.dart";
+import 'package:get/get.dart';
+import 'package:parkers_anniversary/auth_controller.dart';
+import 'package:parkers_anniversary/screens/profile.dart';
+import 'package:parkers_anniversary/screens/signup.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -9,6 +13,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -62,11 +68,15 @@ class _LoginState extends State<Login> {
                         ),
                       ]),
                   child: TextField(
+                    controller: emailController,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                     ),
                     decoration: InputDecoration(
+                      hintText: "E-mail",
+                      prefixIcon: Icon(Icons.email_rounded,
+                          color: Colors.redAccent[700]),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide:
@@ -100,11 +110,16 @@ class _LoginState extends State<Login> {
                         ),
                       ]),
                   child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                     ),
                     decoration: InputDecoration(
+                      hintText: "Password",
+                      prefixIcon: Icon(Icons.password_rounded,
+                          color: Colors.redAccent[700]),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide:
@@ -170,14 +185,12 @@ class _LoginState extends State<Login> {
                             style: TextStyle(fontSize: 20, color: Colors.black),
                           ),
                           TextSpan(
-                              text: "Signup!",
-                              style: TextStyle(
-                                  fontSize: 20, color: Colors.red[300]),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  // ignore: avoid_print
-                                  print("Signup clicked");
-                                }),
+                            text: "Signup!",
+                            style:
+                                TextStyle(fontSize: 20, color: Colors.red[300]),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Get.to(() => const Signup()),
+                          ),
                         ],
                       ),
                     ),
@@ -197,7 +210,10 @@ class _LoginState extends State<Login> {
                 shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
               ),
-              onPressed: () {},
+              onPressed: () {
+                AuthController.instance.login(emailController.text.trim(),
+                    passwordController.text.trim());
+              },
               child: const Text(
                 'Login',
                 style: TextStyle(fontSize: 27),

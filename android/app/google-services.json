@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "56037778860",
+    "project_id": "parkers-anniversary",
+    "storage_bucket": "parkers-anniversary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56037778860:android:f48a9fd8e83f23ff8c0609",
+        "android_client_info": {
+          "package_name": "com.example.parkers_anniversary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56037778860-4gn11lj643uosfh92akt72gve4iag5fl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAWyZnSRSEMt-aSXk3yAkT-kz5WB-ZJkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56037778860-4gn11lj643uosfh92akt72gve4iag5fl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

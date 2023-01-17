@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../auth_controller.dart';
 import '../shared/menu_bottom.dart';
 import '../shared/menu_drawer.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -119,24 +120,29 @@ class Profile extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 30.0),
-                child: Row(
-                  children: [
-                    Icon(Icons.logout, color: Colors.red[400], size: 50.0),
-                    const SizedBox(
-                      width: 40,
-                    ),
-                    Text(
-                      "Logout",
-                      style: TextStyle(
-                        color: Colors.redAccent[700],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+              GestureDetector(
+                onTap: () {
+                  AuthController.instance.logOut();
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(top: 30.0),
+                  child: Row(
+                    children: [
+                      Icon(Icons.logout, color: Colors.red[400], size: 50.0),
+                      const SizedBox(
+                        width: 40,
                       ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
+                      Text(
+                        "Logout",
+                        style: TextStyle(
+                          color: Colors.redAccent[700],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
