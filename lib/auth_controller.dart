@@ -21,7 +21,8 @@ class AuthController extends GetxController {
     ever(_user, _initialScreen);
   }
 
-  _initialScreen(User? user) {
+  _initialScreen(User? user) async {
+    await Future.delayed(const Duration(seconds: 3));
     if (user == null) {
       Get.offAll(() => const Login());
     } else {
@@ -37,6 +38,7 @@ class AuthController extends GetxController {
       Get.snackbar(
         "About user",
         "User message",
+        duration: const Duration(seconds: 5),
         backgroundColor: Colors.yellow,
         snackPosition: SnackPosition.BOTTOM,
         titleText: const Text(
@@ -55,18 +57,21 @@ class AuthController extends GetxController {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
+      // ignore: avoid_print
+      print(e);
       Get.snackbar(
         "About Login",
         "Login message",
+        duration: const Duration(seconds: 5),
         backgroundColor: Colors.yellow,
         snackPosition: SnackPosition.BOTTOM,
         titleText: const Text(
           "Login failed",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
-        messageText: Text(
-          e.toString(),
-          style: const TextStyle(color: Colors.black),
+        messageText: const Text(
+          "Incorrect username or password",
+          style: TextStyle(color: Colors.black, fontSize: 14),
         ),
       );
     }

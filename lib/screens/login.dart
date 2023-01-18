@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import "package:flutter/gestures.dart";
 import 'package:get/get.dart';
 import 'package:parkers_anniversary/auth_controller.dart';
-import 'package:parkers_anniversary/screens/profile.dart';
 import 'package:parkers_anniversary/screens/signup.dart';
 
 class Login extends StatefulWidget {
