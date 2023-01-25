@@ -1,3 +1,4 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,10 +7,11 @@ import 'package:parkers_anniversary/screens/history.dart';
 import 'package:parkers_anniversary/screens/intro_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:parkers_anniversary/screens/landing.dart';
+import 'package:parkers_anniversary/screens/profile.dart';
+import 'package:parkers_anniversary/screens/your_entries.dart';
 
 import 'screens/how_to.dart';
 import 'screens/new_entry.dart';
-import 'screens/profile.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +36,7 @@ class ParkersAnniversary extends StatelessWidget {
         "/new_entry": (context) => const NewEntry(),
         "/history": (context) => const History(),
         "/profile": (context) => const Profile(),
+        "/your_entries": (context) => YourEntries(),
       },
       initialRoute: "/",
     );

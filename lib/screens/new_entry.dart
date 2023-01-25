@@ -1,9 +1,13 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -21,9 +25,12 @@ class NewEntry extends StatefulWidget {
 class _NewEntryState extends State<NewEntry> {
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
+  final _userID = FirebaseAuth.instance.currentUser?.uid;
 
   File? _image;
   final ImagePicker _picker = ImagePicker();
+  final _receiptNumber = TextEditingController();
+  int counter = 0;
 
   Future imgFromGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -31,7 +38,6 @@ class _NewEntryState extends State<NewEntry> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-        uploadFile();
       } else {
         print('No image selected.');
       }
@@ -44,7 +50,6 @@ class _NewEntryState extends State<NewEntry> {
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-        uploadFile();
       } else {
         print('No image selected.');
       }
@@ -54,10 +59,23 @@ class _NewEntryState extends State<NewEntry> {
   Future uploadFile() async {
     if (_image == null) return;
     final fileName = basename(_image!.path);
-    final destination = 'files/$fileName';
+    final destination = 'files/USER-$_userID/$fileName';
+
+    final imageName = basename(_image!.path).toString();
+    final receiptNumber = _receiptNumber.text.toString().trim();
+    final uploadTime = DateTime.now();
 
     try {
+      Map<String, Object> receipt = {
+        'imageName': imageName,
+        'receiptNumber': receiptNumber,
+        'uploadTime': uploadTime,
+      };
       final ref = firebase_storage.FirebaseStorage.instance.ref(destination);
+      final db = FirebaseFirestore.instance;
+      await db.collection('users').doc(_userID).collection("receipts").add(
+            receipt,
+          );
       await ref.putFile(_image!);
     } catch (e) {
       print('error occured');
@@ -91,31 +109,6 @@ class _NewEntryState extends State<NewEntry> {
           );
         });
   }
-  // Future getImage(ImageSource source) async {
-  //   try {
-  //     final image = await ImagePicker().pickImage(source: source);
-
-  //     if (image == null) return;
-  //     final imageTemporary = File(image.path);
-  //     // final imagePermanent = await saveFilePermanently(image.path);
-
-  //     setState(() {
-  //       // ignore: unnecessary_this
-  //       this._image = imageTemporary;
-  //     });
-  //   } on PlatformException catch (e) {
-  //     // ignore: avoid_print
-  //     print("Failed to pick image: $e");
-  //   }
-  // }
-  // How to save an image to a directory
-  // Future<File> saveFilePermanently(String imagePath) async {
-  //   final directory = await getApplicationDocumentsDirectory();
-  //   final name = basename(imagePath);
-  //   final image = File('${directory.path}/$name');
-
-  //   return File(imagePath).copy(image.path);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -149,27 +142,96 @@ class _NewEntryState extends State<NewEntry> {
               Container(
                 height: 50,
               ),
-              _image != null
-                  ? Image.file(
-                      _image!,
+              _image == null
+                  ? Image.asset(
+                      "assets/images/placeholder.png",
                       width: 250,
                       height: 250,
                       fit: BoxFit.cover,
                     )
-                  : Image.asset(
-                      "assets/images/placeholder.png",
+                  : Image.file(
+                      _image!,
                       width: 250,
                       height: 250,
                       fit: BoxFit.cover,
                     ),
               const SizedBox(
-                height: 50,
+                height: 30,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 10,
+                        spreadRadius: 7,
+                        offset: const Offset(1, 1),
+                        color: Colors.grey.withOpacity(0.3),
+                      ),
+                    ]),
+                child: TextField(
+                  controller: _receiptNumber,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: "Receipt number",
+                    prefixIcon: const Icon(Icons.receipt_long),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide:
+                          const BorderSide(color: Colors.grey, width: 1.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  customButton(
+                    title: "Pick an image",
+                    icon: Icons.image_outlined,
+                    onClick: () => _showPicker(context),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  customButton(
+                    title: "Clear image",
+                    icon: Icons.clear,
+                    onClick: () => setState(() {
+                      _image = null;
+                      print(_image);
+                    }),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
               ),
               customButton(
-                title: "Upload image",
-                icon: Icons.image_outlined,
-                onClick: () => _showPicker(context),
-              ),
+                  title: "Submit",
+                  icon: Icons.arrow_upward,
+                  onClick: () {
+                    uploadFile();
+                    setState(() {
+                      counter++;
+                    });
+                  }),
             ],
           ),
         ),
@@ -183,15 +245,16 @@ Widget customButton({
   required IconData icon,
   required VoidCallback onClick,
 }) {
-  return SizedBox(
-    width: 280,
+  return Container(
+    margin: const EdgeInsets.only(left: 10),
+    width: 170,
     child: ElevatedButton(
         onPressed: onClick,
         child: Row(
           children: [
             Icon(icon),
             const SizedBox(
-              width: 40,
+              width: 10,
             ),
             Text(title),
           ],

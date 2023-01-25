@@ -12,6 +12,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool isLoging = false;
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   @override
@@ -209,14 +210,29 @@ class _LoginState extends State<Login> {
                 shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
               ),
-              onPressed: () {
+              onPressed: () async {
                 AuthController.instance.login(emailController.text.trim(),
                     passwordController.text.trim());
+                setState(() {
+                  isLoging = true;
+                });
+                await Future.delayed(const Duration(seconds: 5));
+                setState(() {
+                  isLoging = false;
+                });
               },
-              child: const Text(
-                'Login',
-                style: TextStyle(fontSize: 27),
-              ),
+              child: (isLoging)
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 1.5,
+                      ))
+                  : const Text(
+                      'Login',
+                      style: TextStyle(fontSize: 27),
+                    ),
             ),
           )
         ],
