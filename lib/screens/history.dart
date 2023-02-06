@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:parkers_anniversary/shared/menu_bottom.dart';
-import 'package:parkers_anniversary/shared/menu_drawer.dart';
+// import 'package:parkers_anniversary/shared/menu_drawer.dart';
 
 class History extends StatelessWidget {
   const History({super.key});
@@ -9,27 +9,17 @@ class History extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: const IconThemeData(color: Colors.black),
-          title: Row(
-            children: [
-              Image.asset(
-                "assets/images/logo.png",
-                fit: BoxFit.contain,
-                height: 48,
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              const Text(
-                "Our History",
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            ],
-          )),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Center(
+          child: Text(
+            "Our history",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+        ),
+        automaticallyImplyLeading: false,
+      ),
       bottomNavigationBar: const MenuBottom(),
-      drawer: const MenuDrawer(),
       body: GridView.count(
         crossAxisCount: 2, // having 2 columns per row
         crossAxisSpacing: 10,

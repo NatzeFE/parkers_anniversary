@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:parkers_anniversary/shared/menu_drawer.dart';
+// import 'package:parkers_anniversary/shared/menu_drawer.dart';
 import '../shared/menu_bottom.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
@@ -13,44 +13,17 @@ class IntroScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         title: Row(
-          // mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               "assets/images/logo.png",
               fit: BoxFit.contain,
               height: 48,
             ),
-            const SizedBox(
-              width: 40,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(left: 5.0),
-                  child: Icon(FontAwesomeIcons.facebook,
-                      color: Colors.red[400], size: 25.0),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 5.0),
-                  child: Icon(FontAwesomeIcons.instagram,
-                      color: Colors.red[400], size: 25.0),
-                ),
-                Container(
-                    margin: const EdgeInsets.only(left: 5.0),
-                    child: Icon(FontAwesomeIcons.at,
-                        color: Colors.red[400], size: 25.0)),
-                Container(
-                  margin: const EdgeInsets.only(left: 5.0),
-                  child: Icon(FontAwesomeIcons.envelope,
-                      color: Colors.red[400], size: 25.0),
-                ),
-              ],
-            ),
           ],
         ),
+        automaticallyImplyLeading: false,
       ),
-      drawer: const MenuDrawer(),
       bottomNavigationBar: const MenuBottom(),
       body: Container(
         decoration: const BoxDecoration(

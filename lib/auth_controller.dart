@@ -42,11 +42,27 @@ class AuthController extends GetxController {
   }
 
   void register(String email, password) async {
+    User? user;
     try {
       // FirebaseFirestore.instance.collection('users').doc(getUserId());
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);
-
+      Get.snackbar(
+        "About user",
+        "User message",
+        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.greenAccent,
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: const Text(
+          "Registering account successful",
+          style: TextStyle(color: Colors.black),
+        ),
+        messageText: const Text(
+          "User created",
+          style: TextStyle(color: Colors.black),
+        ),
+      );
+      if (user?.email == email) return;
       // print("tekst:", proba.uid);
     } catch (e) {
       Get.snackbar(
@@ -59,9 +75,9 @@ class AuthController extends GetxController {
           "Account creation failed",
           style: TextStyle(color: Colors.black),
         ),
-        messageText: Text(
-          e.toString(),
-          style: const TextStyle(color: Colors.black),
+        messageText: const Text(
+          "User with the email already exists!",
+          style: TextStyle(color: Colors.black),
         ),
       );
     }

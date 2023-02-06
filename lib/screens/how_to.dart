@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../shared/menu_bottom.dart';
-import '../shared/menu_drawer.dart';
+// import '../shared/menu_drawer.dart';
 
 class HowTo extends StatefulWidget {
   const HowTo({super.key});
@@ -16,35 +16,25 @@ class _HowToState extends State<HowTo> {
   final controller = CarouselController();
   int activeIndex = 0;
   final images = [
-    "assets/images/placeholder.png",
-    "assets/images/placeholder2.png",
-    "assets/images/placeholder3.png",
+    "assets/images/takePic.jpg",
+    "assets/images/rec.jpg",
+    "assets/images/submit.jpg",
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: const IconThemeData(color: Colors.black),
-          title: Row(
-            children: [
-              Image.asset(
-                "assets/images/logo.png",
-                fit: BoxFit.contain,
-                height: 48,
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              const Text(
-                "How to",
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            ],
-          )),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Center(
+          child: Text(
+            "How to enter",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+        ),
+        automaticallyImplyLeading: false,
+      ),
       bottomNavigationBar: const MenuBottom(),
-      drawer: const MenuDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parkers_anniversary/auth_controller.dart';
+import 'package:parkers_anniversary/screens/edit_profile.dart';
 import 'package:parkers_anniversary/screens/history.dart';
 import 'package:parkers_anniversary/screens/intro_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,6 +37,7 @@ class ParkersAnniversary extends StatelessWidget {
         "/new_entry": (context) => const NewEntry(),
         "/history": (context) => const History(),
         "/profile": (context) => const Profile(),
+        "/edit_profile": (context) => const EditProfile(),
         "/your_entries": (context) => YourEntries(),
       },
       initialRoute: "/",

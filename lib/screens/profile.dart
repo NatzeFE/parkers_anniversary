@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../auth_controller.dart';
 import '../shared/menu_bottom.dart';
-import '../shared/menu_drawer.dart';
+// import '../shared/menu_drawer.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -17,12 +17,12 @@ class _ProfileState extends State<Profile> {
   final String? documentID = FirebaseAuth.instance.currentUser?.uid;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   final db = FirebaseFirestore.instance;
-  final _userID = FirebaseAuth.instance.currentUser?.uid;
+  // final _userID = FirebaseAuth.instance.currentUser?.uid;
   final email = FirebaseAuth.instance.currentUser?.email;
 
   bool isLoggingOut = false;
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
+  // final TextEditingController _firstNameController = TextEditingController();
+  // final TextEditingController _lastNameController = TextEditingController();
   Map<String, dynamic> data = {};
 
   @override
@@ -44,93 +44,45 @@ class _ProfileState extends State<Profile> {
         }
         return Scaffold(
           appBar: AppBar(
-              backgroundColor: Colors.white,
-              iconTheme: const IconThemeData(color: Colors.black),
-              title: Row(
-                children: [
-                  Image.asset(
-                    "assets/images/logo.png",
-                    fit: BoxFit.contain,
-                    height: 48,
-                  ),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  const Text(
-                    "Your profile",
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              )),
+            backgroundColor: Colors.white,
+            iconTheme: const IconThemeData(color: Colors.black),
+            title: const Center(
+              child: Text(
+                "Profile",
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+            ),
+            automaticallyImplyLeading: false,
+          ),
           bottomNavigationBar: const MenuBottom(),
-          drawer: const MenuDrawer(),
           body: Container(
             margin: const EdgeInsets.only(left: 20.0),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 35.0),
-                    child: Row(
-                      children: [
-                        Icon(Icons.account_box_outlined,
-                            color: Colors.red[400], size: 50.0),
-                        const SizedBox(
-                          width: 40,
-                        ),
-                        GestureDetector(
-                          onTap: () => openDialog(),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    _firstNameController.text != " "
-                                        ? "${data['firstName']} "
-                                        : "First name",
-                                    style: TextStyle(
-                                      color: Colors.redAccent[700],
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  Text(
-                                    _firstNameController.text != " "
-                                        ? "${data['lastName']}"
-                                        : "Last name",
-                                    style: TextStyle(
-                                      color: Colors.redAccent[700],
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                email!,
-                                style: TextStyle(
-                                    color: Colors.redAccent[700],
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                _firstNameController.text != " "
-                                    ? "${data['phoneNumber']}"
-                                    : "Phone number",
-                                style: TextStyle(
-                                    color: Colors.redAccent[700],
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                                textAlign: TextAlign.left,
-                              ),
-                            ],
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, "/edit_profile"),
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 30.0),
+                      child: Row(
+                        children: [
+                          Icon(Icons.account_box_outlined,
+                              color: Colors.red[400], size: 50.0),
+                          const SizedBox(
+                            width: 40,
                           ),
-                        ),
-                      ],
+                          Text(
+                            "Edit profile",
+                            style: TextStyle(
+                              color: Colors.redAccent[700],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   GestureDetector(
@@ -183,10 +135,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      AuthController.instance.logOut();
-                      setState(() {
-                        isLoggingOut = true;
-                      });
+                      openDialog();
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 30.0),
@@ -230,39 +179,20 @@ class _ProfileState extends State<Profile> {
   Future openDialog() => showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text("Edit profile"),
-          content: SizedBox(
-            width: 200,
-            height: 150,
-            child: Column(
-              children: [
-                TextField(
-                  controller: _firstNameController,
-                  decoration: const InputDecoration(hintText: "First name"),
-                ),
-                TextField(
-                  controller: _lastNameController,
-                  decoration: const InputDecoration(hintText: "Last name"),
-                ),
-              ],
-            ),
-          ),
+          title: const Text("Are you sure you want to logout?"),
           actions: [
             TextButton(
-              child: const Text("CANCEL"),
+              child: const Text("NO"),
               onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(
-              child: const Text("SUBMIT"),
+              child: const Text("YES"),
               onPressed: () {
-                db.collection('users').doc(_userID).update({
-                  'firstName': _firstNameController.text,
-                  'lastName': _lastNameController.text,
+                AuthController.instance.logOut();
+                setState(() {
+                  isLoggingOut = true;
                 });
                 Navigator.of(context).pop();
-
-                // user.firstName = _firstNameController.text;
-                // user.lastName = _lastNameController.text;
               },
             ),
           ],
