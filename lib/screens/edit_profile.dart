@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,11 +32,9 @@ class _EditProfileState extends State<EditProfile> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
-
+  String imageUrl = "";
   final _firstNameKey = GlobalKey<FormFieldState>();
   final _lastNameKey = GlobalKey<FormFieldState>();
-  bool? ime;
-  bool? prezime;
   Map<String, dynamic> data = {};
 
   Future imgFromGallery() async {
@@ -81,8 +80,10 @@ class _EditProfileState extends State<EditProfile> {
           }
           _firstNameController.text = "${data['firstName']}";
           _lastNameController.text = "${data['lastName']}";
-          ime = false;
-          prezime = false;
+          if (data.containsKey("profileImgUrl")) {
+            imageUrl = "${data['profileImgUrl']}";
+          }
+
           return Scaffold(
             appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.black),
@@ -135,16 +136,18 @@ class _EditProfileState extends State<EditProfile> {
                             ],
                             shape: BoxShape.circle,
                             image: _image == null
-                                ? const DecorationImage(
+                                ? DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: AssetImage(
-                                      "assets/images/placeholder.png",
-                                    ),
+                                    image: data["profileImgUrl"] != null
+                                        ? NetworkImage(
+                                            "${data["profileImgUrl"]}")
+                                        : const AssetImage(
+                                                "assets/images/placeholder.png")
+                                            as ImageProvider,
                                   )
                                 : DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: FileImage(_image!),
-                                  ),
+                                    image: FileImage(_image!)),
                           ),
                         ),
                         Positioned(
@@ -261,6 +264,7 @@ class _EditProfileState extends State<EditProfile> {
                                     );
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(snackBar);
+                                    uploadProfile();
                                   } else {
                                     return;
                                   }
@@ -295,6 +299,22 @@ class _EditProfileState extends State<EditProfile> {
             ),
           );
         });
+  }
+
+  void uploadProfile() async {
+    if (_image == null) return;
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDir = referenceRoot.child("files");
+    Reference referenceUser = referenceDir.child("USER-$documentID");
+    Reference referenceImg = referenceUser.child("profile_img.jpg");
+
+    await referenceImg.putFile(File(_image!.path));
+
+    imageUrl = await referenceImg.getDownloadURL();
+
+    db.collection('users').doc(documentID).update({
+      "profileImgUrl": imageUrl,
+    });
   }
 
   void _showPicker(context) {
