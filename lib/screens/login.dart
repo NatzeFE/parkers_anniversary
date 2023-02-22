@@ -237,7 +237,7 @@ class _LoginState extends State<Login> {
                                 children: [
                                   TextSpan(
                                       text: "Forgot your password?",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 16, color: Colors.grey),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {

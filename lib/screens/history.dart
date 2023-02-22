@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:parkers_anniversary/shared/menu_bottom.dart';
+import 'package:parkers_anniversary/shared/main_page.dart';
 // import 'package:parkers_anniversary/shared/menu_drawer.dart';
 
 class History extends StatelessWidget {
@@ -19,7 +19,6 @@ class History extends StatelessWidget {
         ),
         automaticallyImplyLeading: false,
       ),
-      bottomNavigationBar: const MenuBottom(),
       body: GridView.count(
         crossAxisCount: 2, // having 2 columns per row
         crossAxisSpacing: 10,

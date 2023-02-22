@@ -27,12 +27,14 @@ class _EditProfileState extends State<EditProfile> {
   // ignore: unused_field
   File? _image;
   final String? documentID = FirebaseAuth.instance.currentUser?.uid;
+  String imageUrl = "";
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   final db = FirebaseFirestore.instance;
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _emailController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
-  String imageUrl = "";
   final _firstNameKey = GlobalKey<FormFieldState>();
   final _lastNameKey = GlobalKey<FormFieldState>();
   Map<String, dynamic> data = {};
@@ -80,6 +82,9 @@ class _EditProfileState extends State<EditProfile> {
           }
           _firstNameController.text = "${data['firstName']}";
           _lastNameController.text = "${data['lastName']}";
+          _emailController.text = "${data['email']}";
+          _phoneController.text = "${data['phoneNumber']}";
+
           if (data.containsKey("profileImgUrl")) {
             imageUrl = "${data['profileImgUrl']}";
           }
@@ -88,13 +93,13 @@ class _EditProfileState extends State<EditProfile> {
             appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.black),
               backgroundColor: Colors.white,
-              // title: const Align(
-              //     alignment: Alignment.centerLeft,
-              //     child: Text(
-              //       "My Profile",
-              //       style:
-              //           TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              //     )),
+              title: const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "My Profile",
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  )),
               automaticallyImplyLeading: false,
               elevation: 1,
               leading: IconButton(
@@ -109,10 +114,6 @@ class _EditProfileState extends State<EditProfile> {
               margin: const EdgeInsets.only(left: 16, top: 25, right: 16),
               child: ListView(
                 children: [
-                  const Text(
-                    "Edit Profile",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
                   const SizedBox(
                     height: 15,
                   ),
@@ -137,6 +138,7 @@ class _EditProfileState extends State<EditProfile> {
                             shape: BoxShape.circle,
                             image: _image == null
                                 ? DecorationImage(
+                                    alignment: Alignment.center,
                                     fit: BoxFit.cover,
                                     image: data["profileImgUrl"] != null
                                         ? NetworkImage(
@@ -221,6 +223,30 @@ class _EditProfileState extends State<EditProfile> {
                       errorMaxLines: 2,
                       contentPadding: EdgeInsets.only(bottom: -5),
                       labelText: "Last name",
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextFormField(
+                    controller: _emailController,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.only(bottom: -5),
+                      labelText: "Email",
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextFormField(
+                    controller: _phoneController,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.only(bottom: -5),
+                      labelText: "Phone Number",
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                     ),
                   ),

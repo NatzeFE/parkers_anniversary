@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../auth_controller.dart';
-import '../shared/menu_bottom.dart';
+import '../shared/main_page.dart';
 // import '../shared/menu_drawer.dart';
 
 class Profile extends StatefulWidget {
@@ -55,7 +55,6 @@ class _ProfileState extends State<Profile> {
             ),
             automaticallyImplyLeading: false,
           ),
-          bottomNavigationBar: const MenuBottom(),
           body: Container(
             margin: const EdgeInsets.only(left: 20.0),
             child: SingleChildScrollView(
@@ -86,7 +85,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, "/your_entries"),
+                    onTap: () => Navigator.pushNamed(context, "/history"),
                     child: Container(
                       margin: const EdgeInsets.only(top: 30.0),
                       child: Row(
@@ -97,7 +96,7 @@ class _ProfileState extends State<Profile> {
                             width: 40,
                           ),
                           Text(
-                            "Your Entries",
+                            "Our history",
                             style: TextStyle(
                               color: Colors.redAccent[700],
                               fontWeight: FontWeight.bold,

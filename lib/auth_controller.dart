@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parkers_anniversary/screens/intro_screen.dart';
 import 'package:parkers_anniversary/screens/login.dart';
+import 'package:parkers_anniversary/shared/main_page.dart';
 
 class AuthController extends GetxController {
   // AuthController.instance..
@@ -37,7 +38,7 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => const Login());
     } else {
-      Get.offAll(() => const IntroScreen());
+      Get.offAll(() => const MainPage());
     }
   }
 
@@ -121,7 +122,7 @@ class AuthController extends GetxController {
   //   return userID.toString();
   // }
 
-  String getEmail() {
-    return auth.currentUser!.email.toString().toLowerCase();
-  }
+  // String getEmail() {
+  //   return auth.currentUser!.email.toString().toLowerCase();
+  // }
 }

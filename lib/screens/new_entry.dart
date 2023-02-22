@@ -7,11 +7,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:parkers_anniversary/screens/intro_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-import '../shared/menu_bottom.dart';
+import '../shared/main_page.dart';
 // import '../shared/menu_drawer.dart';
 
 class NewEntry extends StatefulWidget {
@@ -25,10 +26,12 @@ class _NewEntryState extends State<NewEntry> {
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
   final _userID = FirebaseAuth.instance.currentUser?.uid;
+  String receiptUrl = "";
 
   File? _image;
   final ImagePicker _picker = ImagePicker();
   final _receiptNumber = TextEditingController();
+  // ignore: prefer_typing_uninitialized_variables
   var rcpNmbr;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Future imgFromGallery() async {
@@ -63,22 +66,26 @@ class _NewEntryState extends State<NewEntry> {
     final fileName = basename(_image!.path);
     final destination = 'files/USER-$_userID/receipts/$fileName';
 
-    final imageName = basename(_image!.path).toString();
+    // final imageName = basename(_image!.path).toString();
     final receiptNumber = _receiptNumber.text.toString().trim();
     final uploadTime = DateTime.now();
 
     try {
-      Map<String, Object> receipt = {
-        'imageName': imageName,
-        'receiptNumber': receiptNumber,
-        'uploadTime': uploadTime,
-      };
       final ref = firebase_storage.FirebaseStorage.instance.ref(destination);
       final db = FirebaseFirestore.instance;
+      await ref.putFile(_image!);
+      receiptUrl = await ref.getDownloadURL();
+      print(receiptUrl);
+      Map<String, Object> receipt = {
+        'receiptUrl': receiptUrl,
+        'receiptNumber': receiptNumber,
+        'uploadTime': uploadTime,
+        'userId': _userID.toString(),
+        // 'receiptKeywords': receiptNumber.split(","),
+      };
       await db.collection('users').doc(_userID).collection("receipts").add(
             receipt,
           );
-      await ref.putFile(_image!);
     } catch (e) {
       print('error occured');
     }
@@ -126,7 +133,6 @@ class _NewEntryState extends State<NewEntry> {
         ),
         automaticallyImplyLeading: false,
       ),
-      bottomNavigationBar: const MenuBottom(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         reverse: true,
@@ -187,31 +193,34 @@ class _NewEntryState extends State<NewEntry> {
                 child: Form(
                   key: _formKey,
                   child: TextFormField(
-                    maxLength: 13,
                     controller: _receiptNumber,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.number,
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 15,
                         backgroundColor: Colors.white),
                     onChanged: (value) {
-                      _formKey.currentState?.validate();
                       setState(() {
                         rcpNmbr = _receiptNumber.text.trim();
+                        if (rcpNmbr.toString().length == 13) {
+                          _formKey.currentState?.validate();
+                        }
                       });
                     },
+                    onEditingComplete: () {
+                      _formKey.currentState?.validate();
+                    },
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please enter a valid receipt";
-                      } else if (value.length < 13) {
-                        return "Receipt should be 13 characters long";
-                      } else if (value.contains(" ")) {
-                        return "Cannot contain any whitespace";
+                      if (value == " " || value!.isEmpty) {
+                        return 'Field must not be empty';
+                      } else if (!RegExp(r"^[0-9]{13}$").hasMatch(value)) {
+                        return "Receipt must have 13 numbers";
                       }
                       return null;
                     },
                     decoration: InputDecoration(
-                      hintText: "Receipt number",
+                      errorMaxLines: 3,
+                      hintText: "Enter your 13 digit receipt",
                       prefixIcon: const Icon(Icons.receipt_long),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -235,13 +244,14 @@ class _NewEntryState extends State<NewEntry> {
                   color: Colors.red,
                   title: "Submit",
                   icon: Icons.arrow_upward,
-                  onClick: (_image == null || rcpNmbr.toString().length < 13)
+                  onClick: (_image == null || rcpNmbr.toString().length != 13)
                       ? null
                       : () {
                           uploadFile();
-                          // setState(() {
-                          //   _image = null;
-                          // });
+                          setState(() {
+                            _image = null;
+                            _receiptNumber.clear();
+                          });
 
                           const snackBar = SnackBar(
                             content: Text(
@@ -260,8 +270,8 @@ class _NewEntryState extends State<NewEntry> {
                             behavior: SnackBarBehavior.fixed,
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, "/new_entry");
+                          // Navigator.pop(context);
+                          // Navigator.pushNamed(context, "/main_page");
                         }),
             ],
           ),

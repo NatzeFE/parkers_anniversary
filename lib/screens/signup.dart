@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:parkers_anniversary/auth_controller.dart';
 import 'package:parkers_anniversary/screens/login.dart';
@@ -493,6 +493,7 @@ class _SignupState extends State<Signup> {
                                       'firstName': firstNameController.text,
                                       'lastName': lastNameController.text,
                                       'phoneNumber': phoneNumberController.text,
+                                      'email': emailController.text,
                                     });
                                   }
                                 });

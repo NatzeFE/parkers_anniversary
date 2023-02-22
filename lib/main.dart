@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:parkers_anniversary/screens/landing.dart';
 import 'package:parkers_anniversary/screens/profile.dart';
 import 'package:parkers_anniversary/screens/your_entries.dart';
+import 'package:parkers_anniversary/shared/main_page.dart';
 
 import 'screens/how_to.dart';
 import 'screens/new_entry.dart';
@@ -38,7 +39,8 @@ class ParkersAnniversary extends StatelessWidget {
         "/history": (context) => const History(),
         "/profile": (context) => const Profile(),
         "/edit_profile": (context) => const EditProfile(),
-        "/your_entries": (context) => YourEntries(),
+        "/your_entries": (context) => const YourEntries(),
+        "/main_page": (context) => const MainPage(),
       },
       initialRoute: "/",
     );
