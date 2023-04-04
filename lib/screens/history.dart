@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:parkers_anniversary/shared/main_page.dart';
+// import 'package:parkers_anniversary/shared/main_page.dart';
 // import 'package:parkers_anniversary/shared/menu_drawer.dart';
 
 class History extends StatelessWidget {
@@ -11,11 +11,16 @@ class History extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.black),
-        title: const Center(
-          child: Text(
-            "Our history",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
           ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          "Our history",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         automaticallyImplyLeading: false,
       ),

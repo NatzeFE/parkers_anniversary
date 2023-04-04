@@ -5,14 +5,14 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:parkers_anniversary/screens/intro_screen.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:parkers_anniversary/screens/intro_screen.dart';
+// import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-import '../shared/main_page.dart';
+// import '../shared/main_page.dart';
 // import '../shared/menu_drawer.dart';
 
 class NewEntry extends StatefulWidget {
@@ -140,29 +140,33 @@ class _NewEntryState extends State<NewEntry> {
           child: Column(
             children: [
               Container(
-                height: 50,
+                height: 70,
               ),
               _image == null
-                  ? Stack(children: [
-                      Image.asset(
-                        "assets/images/placeholder.png",
-                        width: 250,
-                        height: 250,
-                        fit: BoxFit.cover,
-                      ),
-                      Positioned(
-                          right: -9,
-                          bottom: -9,
-                          child: GestureDetector(
-                              child: const Icon(
-                                Icons.add_box,
-                                color: Colors.redAccent,
-                                size: 60,
-                              ),
-                              onTap: () {
-                                _showPicker(context);
-                              })),
-                    ])
+                  ? Container(
+                      width: 260,
+                      height: 260,
+                      child: Stack(children: [
+                        Image.asset(
+                          "assets/images/placeholder.png",
+                          width: 250,
+                          height: 250,
+                          fit: BoxFit.cover,
+                        ),
+                        Positioned(
+                            right: -7,
+                            bottom: -7,
+                            child: GestureDetector(
+                                child: const Icon(
+                                  Icons.add_box,
+                                  color: Colors.redAccent,
+                                  size: 60,
+                                ),
+                                onTap: () {
+                                  _showPicker(context);
+                                })),
+                      ]),
+                    )
                   : Stack(children: [
                       Image.file(
                         _image!,
@@ -238,7 +242,7 @@ class _NewEntryState extends State<NewEntry> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 170,
               ),
               customButton(
                   color: Colors.red,
@@ -251,11 +255,12 @@ class _NewEntryState extends State<NewEntry> {
                           setState(() {
                             _image = null;
                             _receiptNumber.clear();
+                            _receiptNumber.text = "";
                           });
 
                           const snackBar = SnackBar(
                             content: Text(
-                              "Image uploaded successfully",
+                              "Receipt uploaded successfully",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.black,
@@ -291,6 +296,10 @@ Widget customButton({
     width: 250,
     child: ElevatedButton(
         style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: const BorderSide(color: Colors.red))),
             backgroundColor: MaterialStateProperty.all<Color>(color)),
         onPressed: onClick,
         child: Row(

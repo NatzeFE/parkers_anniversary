@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../auth_controller.dart';
-import '../shared/main_page.dart';
+// import '../shared/main_page.dart';
 // import '../shared/menu_drawer.dart';
 
 class Profile extends StatefulWidget {

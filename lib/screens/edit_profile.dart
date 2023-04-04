@@ -8,9 +8,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+// import 'package:path_provider/path_provider.dart';
+// import 'package:path/path.dart';
+// import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 // "([a-zA-Z]{3,30}\s*)+" za first name
 // "[a-zA-Z]{3,30}" za last name bez whitespace

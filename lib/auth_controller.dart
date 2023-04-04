@@ -2,7 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:parkers_anniversary/screens/intro_screen.dart';
+// import 'package:parkers_anniversary/screens/intro_screen.dart';
 import 'package:parkers_anniversary/screens/login.dart';
 import 'package:parkers_anniversary/shared/main_page.dart';
 

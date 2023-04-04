@@ -51,23 +51,162 @@ class _IntroScreenState extends State<IntroScreen> {
             ),
             body: Center(
                 child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 2 - 250,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 170,
+                      height: 170,
+                      decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          border: Border.all(color: Colors.lightBlueAccent),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(
+                              "Total Receipts",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 17),
+                            ),
+                            Text(
+                              "$docCount",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 42,
+                              ),
+                            ),
+                          ]),
+                    ),
+                    Container(
+                      width: 170,
+                      height: 170,
+                      decoration: BoxDecoration(
+                          color: Colors.lightBlueAccent,
+                          border: Border.all(color: Colors.redAccent),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: const [
+                            Text(
+                              "Logins",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 17),
+                            ),
+                            Text(
+                              "5",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 42),
+                            ),
+                          ]),
+                    ),
+                  ],
                 ),
-                const Text(
-                  "Total number of receipts is: ",
-                  style: TextStyle(fontSize: 25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 170,
+                      height: 170,
+                      decoration: BoxDecoration(
+                          color: Colors.greenAccent,
+                          border: Border.all(color: Colors.purpleAccent),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: const [
+                            Text(
+                              "Types of receipts",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 17),
+                            ),
+                            Text(
+                              "1",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 42),
+                            ),
+                          ]),
+                    ),
+                    Container(
+                      width: 170,
+                      height: 170,
+                      decoration: BoxDecoration(
+                          color: Colors.purpleAccent,
+                          border: Border.all(color: Colors.greenAccent),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: const [
+                            Text(
+                              "Expired Receipts",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 17),
+                            ),
+                            Text(
+                              "12",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 42),
+                            ),
+                          ]),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-                CircleAvatar(
-                  radius: 100,
-                  child: Text(
-                    "$docCount",
-                    style: const TextStyle(fontSize: 60),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 170,
+                      height: 170,
+                      decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          border: Border.all(color: Colors.greenAccent),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: const [
+                            Text(
+                              "Failed Uploads",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 17),
+                            ),
+                            Text(
+                              "18",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 42),
+                            ),
+                          ]),
+                    ),
+                    Container(
+                      width: 170,
+                      height: 170,
+                      decoration: BoxDecoration(
+                          color: Colors.green,
+                          border: Border.all(color: Colors.blueAccent),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: const [
+                            Text(
+                              "Deleted Receipts",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 17),
+                            ),
+                            Text(
+                              "7",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 42),
+                            ),
+                          ]),
+                    ),
+                  ],
                 ),
               ],
             )),
